@@ -1,0 +1,24 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:15-alpine
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  api:
+    build:
+      context: ./colloquium/
+      target: production
+      dockerfile: ./dockerfile
+    command: yarn start
+    ports:
+      - 3000:3000
+    depends_on:
+      - db
