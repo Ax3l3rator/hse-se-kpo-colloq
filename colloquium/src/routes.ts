@@ -42,10 +42,8 @@ export const Routes: Route[] = [
     action: 'add',
     validation: [
       param('id').exists().isInt({ min: 1 }),
-      body('name').exists().isString().trim().notEmpty(),
-      body('description').exists().isString().trim().notEmpty(),
-      body('name').exists().isString().trim().notEmpty(),
-      body('description').exists().isString().trim().notEmpty(),
+      body('name').isString().trim().notEmpty(),
+      body('description').isString().trim().notEmpty(),
     ],
   },
   {
